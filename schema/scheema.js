@@ -1,15 +1,26 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const Persons = mongoose.Schema({
- name:{
-     type:String,
-     required:true,
- },direction:{
-     type:String,
-     required:true,
- },date:{
-     type:Date,
-     default:new Date,
- }
-})
-module.exports= mongoose.model('Persons',Persons);
+const Persons = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    direction: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    cart: Array,
+    totalitems: { type: Number, default: 0 },
+    totalprice: { type: Number, default: 0 },
+    pricelist: Array,
+    accepted: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  { timestamps: true }
+);
+module.exports = mongoose.model("Persons", Persons);

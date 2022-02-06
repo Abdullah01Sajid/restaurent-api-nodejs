@@ -1,0 +1,46 @@
+router.get("/cart/:id/:cartId", async (req, res) => {
+  try {
+    const CartOwner = await Person.findById({ _id: req.params.id });
+    if (CartOwner.cart !== null) {
+      let newestcart = [...CartOwner.cart];
+      const newcart = newestcart.filter((cartperson) => {
+        return cartperson.id === req.params.cartId;
+      });
+      res.json(newcart);
+    }
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+
+
+
+
+router.get("/cart/:id/:cartId", async (req, res) => {
+  try {
+    const CartOwner = await Person.findById({ _id: req.params.id });
+    if (CartOwner.cart !== null) {
+      const newcart = await cart.findByIdAndUpdate(
+        { id: req.params.cartId },
+        { $set: { quantity: req.body.quantity } }
+      );
+      res.json(newcart);
+    }
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+
+
+
+router.get("/cart/:id/:cartId", async (req, res) => {
+  try {
+    const CartOwner = await Person.findById({ _id: req.params.id });
+    if (CartOwner.cart !== null) {
+      const newcart = await cart.findOne({ id: req.params.cartId });
+      res.json(newcart);
+    }
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
