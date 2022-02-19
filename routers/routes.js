@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Person = require("../schema/scheema");
 const cart = require("../schema/cart");
-const { findByIdAndDelete } = require("../schema/cart");
 //getting all the Users
 router.get("/", async (req, res) => {
   const people = await Person.find();
@@ -11,6 +10,9 @@ router.get("/", async (req, res) => {
 
 //creating a new person
 router.post("/", async (req, res) => {
+  const lat = req.body.lat;
+  const long = req.body.long;
+  const exactDirection = { lat, long };
   const existingPerson = await Person.findOne({
     name: req.body.name,
     direction: req.body.direction,
@@ -21,6 +23,7 @@ router.post("/", async (req, res) => {
     const NewPerson = await new Person({
       name: req.body.name,
       direction: req.body.direction,
+      mapDirection: exactDirection,
     });
     try {
       const saved = await NewPerson.save();

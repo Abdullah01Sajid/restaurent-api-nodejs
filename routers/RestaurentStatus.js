@@ -25,7 +25,7 @@ router.put("/status/:resId", async (req, res) => {
 router.get("/status/:resId", async (req, res) => {
   try {
     const FindData = await Confirmed.findById({ _id: req.params.resId });
-    res.status(200).json(FindData);
+    res.status(200).json(FindData.status);
   } catch (error) {
     res.status(400).json({ message: "can not get status " });
   }

@@ -17,7 +17,7 @@ const stripe = require("./routers/stripe");
 const getOrderData = require("./routers/getOrderData");
 const search = require("./routers/seacrch");
 const login = require("./routers/login");
-
+const Delivered = require("./routers/changeDeliveryStatus");
 //midleware
 app.use(cors());
 app.use(express.json());
@@ -28,13 +28,14 @@ app.use("/pastas", pastaRoute);
 app.use("/postres", postreRoute);
 app.use("/bebidas", bebidaRoute);
 app.use("/all", AllProducts);
-app.use("/user", login);
+//app.use("/user", login);
 app.use("/confirmed/products", confirmedProducts);
 app.use("/restaurent", ResStatus);
 app.use("/get", accept);
 app.use("/search", search);
 app.use("/payment", stripe);
 app.use("/data", getOrderData);
+app.use("/delivered", Delivered);
 ///
 
 mongoose.connect(process.env.mongodb_key, { useNewUrlparser: true }, () => {

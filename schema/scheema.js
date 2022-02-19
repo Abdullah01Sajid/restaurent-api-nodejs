@@ -12,6 +12,9 @@ const Persons = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    mapDirection: {
+      type: Object,
+    },
     cart: Array,
     totalitems: { type: Number, default: 0 },
     totalprice: { type: Number, default: 0 },
@@ -23,4 +26,5 @@ const Persons = new mongoose.Schema(
   },
   { timestamps: true }
 );
+Persons.index({ createdAt: 1 }, { expireAfterSeconds: 2592000 });
 module.exports = mongoose.model("Persons", Persons);

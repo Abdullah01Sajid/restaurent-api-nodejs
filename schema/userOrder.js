@@ -11,6 +11,10 @@ const orderData = new mongoose.Schema(
       type: Object,
       required: true,
     },
+    delivered: {
+      type: String,
+      default: "preparing",
+    },
   },
   { timestamps: true }
 );

@@ -16,4 +16,5 @@ const CartSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+CartSchema.index({ createdAt: 1 }, { expireAfterSeconds: 2592000 });
 module.exports = mongoose.model("CartSchema", CartSchema);

@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Persons = require("../schema/scheema");
 const ConfirmedOrders = require("../schema/confirmed");
-const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 router.get("/", async (req, res) => {
@@ -88,10 +87,6 @@ router.put("/:resId/user/:userid", async (req, res) => {
     if (getUser.totalitems === 0) res.json("empty cart");
     else {
       getUser.accepted = true;
-      await Persons.findByIdAndUpdate(
-        { _id: req.params.userid },
-        { $set: { accepted: true } }
-      );
       const updateRes = await ConfirmedOrders.findByIdAndUpdate(
         { _id: req.params.resId },
         { $set: { order: [getUser] } },
@@ -103,11 +98,6 @@ router.put("/:resId/user/:userid", async (req, res) => {
     if (getUser.totalitems === 0) res.json("empty cart");
     else {
       getUser.accepted = true;
-      await Persons.findByIdAndUpdate(
-        { _id: req.params.userid },
-        { $set: { accepted: true } }
-      );
-
       const updatedRes = await ConfirmedOrders.findByIdAndUpdate(
         { _id: req.params.resId },
         { $set: { order: [...FindRes.order, getUser] } },
