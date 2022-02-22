@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Data = require("../schema/userOrder.js");
+
 router.get("/", async (req, res) => {
   const getData = await Data.find();
   res.json(getData);

@@ -27,24 +27,38 @@ router.post("/login", async (req, res) => {
     res.status(400).json("User does not exist please register");
   }
 });
-router.post("/", async (req, res) => {
+router.post("/register", async (req, res) => {
   if (!(req.body.name && req.body.password)) {
-    res.status(400).json({ message: "missing values" });
+    return res.status(400).json({ message: "missing values" });
   }
-  const existingRestaurent = await ConfirmedOrders.findOne({
+  const findRes = await ConfirmedOrders.findOne({
     resName: req.body.name,
-    resPassword: req.body.password,
   });
-  if (existingRestaurent) {
-    res.status(200).json(existingRestaurent);
-  } else {
-    const orders = await new ConfirmedOrders({
-      resName: req.body.name,
-      resPassword: req.body.password,
-    });
 
-    const saved = await orders.save();
-    res.json(saved);
+  if (findRes) {
+    const hashed = findRes.resPassword;
+    const comparePass = await bcrypt.compare(req.body.password, hashed);
+    if (comparePass) {
+      return res.status(200).json({
+        message: "User already exist",
+      });
+    } else {
+      res.status(400).json({
+        message: "password is not correct",
+      });
+    }
+  } else {
+    const encrypted = await bcrypt.hash(req.body.password, 10);
+    const NewRes = await new ConfirmedOrders(
+      {
+        resName: req.body.name,
+        resPassword: encrypted,
+      },
+      { new: true }
+    );
+    const saved = await NewRes.save();
+    console.log(saved);
+    res.status(200).json(saved);
   }
 });
 

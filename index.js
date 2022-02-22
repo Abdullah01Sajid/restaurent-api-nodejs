@@ -37,10 +37,14 @@ app.use("/payment", stripe);
 app.use("/data", getOrderData);
 app.use("/delivered", Delivered);
 ///
-
-mongoose.connect(process.env.mongodb_key, { useNewUrlparser: true }, () => {
-  console.log("mongoDB is connected");
-});
+app.use(express.static("build"));
+mongoose.connect(
+  "mongodb+srv://abdullahsajid:sajid@cluster0.ybgc0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  { useNewUrlparser: true },
+  () => {
+    console.log("mongoDB is connected");
+  }
+);
 
 app.get("/", (req, res) => {
   res.send("wellcome to home page");
@@ -48,7 +52,7 @@ app.get("/", (req, res) => {
 app.all("*", async (req, res) => {
   res.status(404).json({ message: "error page not found " });
 });
-const port = 5000 || process.env.PORT;
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`server listning on port ${port}`);
 });

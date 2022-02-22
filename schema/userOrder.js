@@ -6,7 +6,6 @@ const orderData = new mongoose.Schema(
       type: String,
       required: true,
     },
-
     user: {
       type: Object,
       required: true,
