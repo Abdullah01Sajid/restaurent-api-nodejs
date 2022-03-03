@@ -13,10 +13,9 @@ router.post("/", async (req, res) => {
       let name = req.body.name;
 
       const getProducts = AllProducts.filter((pro) => {
-        return pro.name.startsWith(req.body.name);
+        return pro.name.startsWith(name);
       });
       res.status(200).json(getProducts);
-      console.log(spliced);
     } else {
       return res.status(400).json({ message: "nothing is being searched " });
     }
