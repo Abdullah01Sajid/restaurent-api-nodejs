@@ -1,30 +1,30 @@
 const bebidas = [
   {
-    name: "Coca Cola",
+    name: "coca cola",
     id: "b001",
     category: "bebida",
     pecio: 1.5,
   },
   {
-    name: "Coca Cola Zero",
+    name: "coca cola Zero",
     id: "b002",
     category: "bebida",
     pecio: 1.5,
   },
   {
-    name: "Fanta Naranja",
+    name: "fanta naranja",
     id: "b003",
     category: "bebida",
     pecio: 1.5,
   },
   {
-    name: "Fanta Limon",
+    name: "fanta limon",
     id: "b004",
     category: "bebida",
     pecio: 1.5,
   },
   {
-    name: "Nestea",
+    name: "nestea",
     id: "b005",
     category: "bebida",
     pecio: 1.0,

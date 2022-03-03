@@ -10,8 +10,10 @@ router.post("/", async (req, res) => {
 
   try {
     if (req.body.name) {
+      let name = req.body.name;
+
       const getProducts = AllProducts.filter((pro) => {
-        return pro.name.startsWith(req.body.name);
+        return pro.name.startsWith(name);
       });
       res.status(200).json(getProducts);
     } else {
