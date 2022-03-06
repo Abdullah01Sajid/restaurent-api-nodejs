@@ -39,7 +39,7 @@ app.use("/delivered", Delivered);
 ///
 app.use(express.static("build"));
 mongoose.connect(
-  "mongodb+srv://abdullahsajid:sajid@cluster0.ybgc0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  process.env.Mongo_Url,
   { useNewUrlparser: true },
   () => {
     console.log("mongoDB is connected");
